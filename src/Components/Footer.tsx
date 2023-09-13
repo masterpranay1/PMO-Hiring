@@ -3,7 +3,7 @@ const Footer = () => {
       <footer>
           {/* Generate the copyright icon */}
           <div className="text-center p-8 bg-red-50 border-t-2">
-              <p className="text-red-700">&copy;2021 PMO Project</p>
+              <p className="text-red-700">&copy;2023 PMO Project</p>
           </div>
       </footer>
   )
