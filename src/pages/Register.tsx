@@ -1,4 +1,4 @@
-import { Navbar, Footer } from "../Components";
+import { Navbar, Footer, Loader } from "../Components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -21,6 +21,8 @@ const RegisterForm = ({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [terms, setTerms] = useState(false);
 
+  const [loading, setLoading] = useState(false)
+
   const handleChanges = (e: any) => {
     const { name, value } = e.target;
     if (name === "email") {
@@ -41,8 +43,10 @@ const RegisterForm = ({
   const handleSubmit = async (e: any) => {
     // TODO : HandleSubmit
     e.preventDefault();
+    setLoading(true);
     // console.log(email, password, confirmPassword, terms);
     if (password !== confirmPassword) {
+      setLoading(true);
       alert("Passwords do not match");
       return;
     }
@@ -55,9 +59,11 @@ const RegisterForm = ({
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-
+      setTerms(false);
+      setLoading(false);
       setIsRegistered(true);
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
@@ -159,10 +165,11 @@ const RegisterForm = ({
           {/* button */}
           <button
             type="submit"
-            className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+            className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 flex items-center justify-center gap-2"
             onClick={handleSubmit}
           >
-            Create an account
+            { !loading && <p>Create an account</p> }
+            { loading && <Loader /> }
           </button>
 
           {/* Link to Login */}
@@ -188,9 +195,9 @@ const PostRegister = () => {
   const [debounce, setDebounce] = useState(false);
 
   const handleSendVerification = async () => {
-
+    console.log("Sending verification email");
     if(debounce) {
-      alert("Please wait for 10 seconds before resending the verification email.");
+      alert("Please wait for 60 seconds before resending the verification email.");
       return;
     }
 
@@ -201,7 +208,7 @@ const PostRegister = () => {
     setDebounce(true);
     setTimeout(() => {
       setDebounce(false);
-    }, 10000);
+    }, 60000);
   };
 
   return (
@@ -216,7 +223,6 @@ const PostRegister = () => {
         </button>
         {debounce && (
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-            Please wait for 10 seconds before resending the verification email.
           </p>
         )}
       </div>

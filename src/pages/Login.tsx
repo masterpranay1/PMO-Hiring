@@ -1,4 +1,4 @@
-import { Navbar, Footer } from "../Components";
+import { Navbar, Footer, Loader } from "../Components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,6 +14,8 @@ const LoginForm = ({
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false)
 
   const handleChanges = (e: any) => {
     const { name, value } = e.target;
@@ -32,7 +34,7 @@ const LoginForm = ({
       alert("Please fill all the fields");
       return;
     }
-
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser as User;
@@ -40,8 +42,10 @@ const LoginForm = ({
         navigate("/");
       } else {
         setRegistered(true);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       alert(error);
     }
   }
@@ -118,10 +122,10 @@ const LoginForm = ({
           </div>
           <button
             type="submit"
-            className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+            className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 flex flex-row items-center justify-center gap-2"
             onClick={handleSubmit}
           >
-            Sign in
+            {loading ? <Loader /> : <span>Sign in</span>}
           </button>
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
             Don’t have an account yet?{" "}
@@ -146,7 +150,7 @@ const VerifyEmail = () => {
 
   const handleSendVerification = async () => {
     if(debounce){
-      alert("Please wait for 10 seconds before resending the verification email.");
+      alert("Please wait for 60 seconds before resending the verification email.");
       return;
     }
     const user = auth.currentUser as User;
@@ -156,7 +160,7 @@ const VerifyEmail = () => {
     setDebounce(true);
     setTimeout(() => {
       setDebounce(false);
-    }, 10000);
+    }, 60000);
   };
 
   return (
@@ -171,7 +175,7 @@ const VerifyEmail = () => {
         </button>
         {debounce && (
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-            Please wait for 10 seconds before resending the verification email.
+            Please wait for 60 seconds before resending the verification email.
           </p>
         )}
       </div>
