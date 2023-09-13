@@ -1,6 +1,10 @@
 import { Footer, Navbar, JobCard } from "../Components";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div
       className="relative overflow-hidden bg-cover bg-no-repeat"
@@ -23,6 +27,9 @@ const Hero = () => {
               <button
                 type="button"
                 className="px-6 py-2 md:px-10 md:py-4 border rounded hover:bg-transparent transition-all bg-red-700 text-white"
+                onClick={() => {
+                  navigate("/register");
+                }}
               >
                 Get started
               </button>
