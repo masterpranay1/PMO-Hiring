@@ -121,8 +121,7 @@ export default function HiringForm() {
     );
 
     const data = await res.json();
-    console.log(data);
-
+    alert(data.message)
     setFormData({
       uid: "",
       name: "",
