@@ -10,7 +10,7 @@ const JobCard = ({
   link: string;
 }) => {
   const navigate = useNavigate();
-
+  console.log(link);
   return (
     <div className="w-full md:w-1/4 h-72 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col">
       <a href="#">
