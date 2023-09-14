@@ -3,8 +3,21 @@ import Home from './pages/Home'
 import Register from "./pages/Register"
 import Login from "./pages/Login"
 import HiringForm from "./pages/HiringForm"
+import { auth } from "./util/firabse"
+import { signOut } from "firebase/auth"
+import { useEffect } from "react"
 
 export default function App() {
+
+  useEffect(() => {
+    const signOutUser = async () => {
+      await signOut(auth);
+    }
+    return () => {
+      signOutUser();
+    }
+  }, [])
+
   return (
     <>
       <Routes>

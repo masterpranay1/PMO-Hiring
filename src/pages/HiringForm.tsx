@@ -13,7 +13,9 @@ import {
 import { IdentificationIcon } from "@heroicons/react/24/outline";
 import { AcademicCapIcon } from "@heroicons/react/24/outline";
 import { Navbar, Footer, Loader } from "../Components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { auth } from "../util/firabse";
+import { useNavigate } from "react-router-dom";
 
 const TextInput = ({
   Icon,
@@ -61,6 +63,7 @@ const TextInput = ({
 
 export default function HiringForm() {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     uid: "",
@@ -76,6 +79,12 @@ export default function HiringForm() {
     previousProjects: "",
     resumeLink: "",
   });
+
+  useEffect(() => {
+    if(!auth.currentUser) {
+      navigate("/login");
+    }
+  }, [])
 
   const handleChange = (e: any) => {
     setFormData({
