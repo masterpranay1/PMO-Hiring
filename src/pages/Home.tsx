@@ -1,9 +1,11 @@
+import { useRef } from "react";
 import { Footer, Navbar, JobCard } from "../Components";
-import { useNavigate } from "react-router-dom";
 
-const Hero = () => {
+const Hero = ({JobOpeningRef} : {JobOpeningRef:any}) => {
 
-  const navigate = useNavigate();
+  const handelClick = () => {
+    JobOpeningRef.current.scrollIntoView({behavior: 'smooth'});
+  }
 
   return (
     <div
@@ -26,17 +28,8 @@ const Hero = () => {
             <div className="flex flex-row flex-wrap justify-center gap-4 w-fit mx-auto mt-8">
               <button
                 type="button"
-                className="px-6 py-2 md:px-10 md:py-4 border rounded hover:bg-transparent transition-all bg-red-700 text-white"
-                onClick={() => {
-                  navigate("/register");
-                }}
-              >
-                Get started
-              </button>
-
-              <button
-                type="button"
                 className="px-6 py-2 md:px-10 md:py-4 border rounded"
+                onClick={handelClick}
               >
                 Explore opportunity
               </button>
@@ -48,9 +41,9 @@ const Hero = () => {
   );
 };
 
-const JobOpenings = () => {
+const JobOpenings = ({refEl} : {refEl : any}) => {
   return (
-    <section className="w-full min-h-screen p-12">
+    <section className="w-full min-h-screen p-12" ref={refEl}>
       <h2 className="text-5xl font-bold text-red-700 mx-auto w-fit text-center">Job Openings</h2>
 
       <div className="flex flex-row flex-wrap justify-center gap-12 w-fit mx-auto mt-32">
@@ -63,11 +56,14 @@ const JobOpenings = () => {
 };
 
 const Home = () => {
+
+  const JobOpeniningRef = useRef(null);
+
   return (
     <section className="w-full min-h-screen">
       <Navbar />
-      <Hero />
-      <JobOpenings />
+      <Hero JobOpeningRef={JobOpeniningRef}/>
+      <JobOpenings refEl={JobOpeniningRef}/>
       <Footer />
     </section>
   );
