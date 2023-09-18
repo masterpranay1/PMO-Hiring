@@ -105,7 +105,7 @@ export default function HiringForm() {
     console.log(formData);
     // Some API Call
     const res = await fetch(
-      "https://cu.dev-fiko.in.net/api/",
+      "https://cu.dev-fiko.in.net/api/insert/",
       {
         method: "POST",
         headers: {
