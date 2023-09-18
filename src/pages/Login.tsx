@@ -28,10 +28,13 @@ const LoginForm = ({
   };
 
   const handleSubmit = async (e: any) => {
-    // TODO : HandleSubmit
     e.preventDefault();
     if(email === "" || password === ""){
       alert("Please fill all the fields");
+      return;
+    }
+    if(!email.match(/[0-9]+@cuchd\.in/)){
+      alert("Please enter the email in the correct format");
       return;
     }
     setLoading(true);
@@ -61,7 +64,7 @@ const LoginForm = ({
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-medium text-red-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Your email
             </label>
@@ -70,7 +73,7 @@ const LoginForm = ({
               name="email"
               id="email"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-              placeholder="name@company.com"
+              placeholder="uid@cuchd.in"
               required
               onChange={handleChanges}
             />
@@ -92,33 +95,6 @@ const LoginForm = ({
               required
               onChange={handleChanges}
             />
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  aria-describedby="remember"
-                  type="checkbox"
-                  className="w-4 h-4 border border-gray-300 rounded bg-red-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800"
-                  required
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label
-                  htmlFor="remember"
-                  className="text-gray-500 dark:text-gray-300"
-                >
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <a
-              href="#"
-              className="text-sm font-medium text-gray-600 hover:underline dark:text-gray-500"
-            >
-              Forgot password?
-            </a>
           </div>
           <button
             type="submit"

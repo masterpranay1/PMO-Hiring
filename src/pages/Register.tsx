@@ -41,10 +41,17 @@ const RegisterForm = ({
   };
 
   const handleSubmit = async (e: any) => {
-    // TODO : HandleSubmit
     e.preventDefault();
+    if(!terms && !confirmPassword && !password && !email) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    if(!email.match(/[0-9]+@cuchd\.in/)){
+      alert("Please enter the email in the correct format");
+      return;
+    }
     setLoading(true);
-    // console.log(email, password, confirmPassword, terms);
     if (password !== confirmPassword) {
       setLoading(true);
       alert("Passwords do not match");
