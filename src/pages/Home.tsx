@@ -47,9 +47,9 @@ const JobOpenings = ({refEl} : {refEl : any}) => {
       <h2 className="text-5xl font-bold text-red-700 mx-auto w-fit text-center">Job Openings</h2>
 
       <div className="flex flex-row flex-wrap justify-center gap-12 w-fit mx-auto mt-32">
-        <JobCard title="Tech" desc="Join the Technical team and dive into the world of AI" link="#" />
-        <JobCard title="Non-Tech" desc="Join the Non-Technical team" link="#" />
-        <JobCard title="Research And Development" desc="Join the Research and Development" link="#" />
+        <JobCard title="Tech" desc="Join the Technical team and dive into the world of AI" link="tech" />
+        <JobCard title="Non-Tech" desc="Join the Non-Technical team" link="non-tech" />
+        <JobCard title="Research And Development" desc="Join the Research and Development" link="research" />
       </div>
     </section>
   );
