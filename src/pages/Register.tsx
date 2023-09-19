@@ -41,14 +41,14 @@ const RegisterForm = ({
   };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     if(!terms && !confirmPassword && !password && !email) {
-      alert("Please fill all the fields");
+      // alert("Please fill all the fields");
       return;
     }
 
     if(!email.match(/[0-9]+@cuchd\.in/)){
-      alert("Please enter the email in the correct format");
+      // alert("Please enter the email in the correct format");
       return;
     }
     setLoading(true);
@@ -100,6 +100,7 @@ const RegisterForm = ({
               placeholder="uid@cuchd.in"
               required
               onChange={handleChanges}
+              pattern="[0-9]+@cuchd\.in"
             />
           </div>
 
